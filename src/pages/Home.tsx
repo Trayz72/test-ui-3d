@@ -4,8 +4,11 @@ import { IntroOverlay } from "../components/homepage/IntroOverlay";
 import { CorridorCaptions } from "../components/homepage/CorridorCaptions";
 import { FocusPanel } from "../components/homepage/FocusPanel";
 import { FinaleSection } from "../components/homepage/FinaleSection";
+import { ExperienceFallback } from "../components/homepage/ExperienceFallback";
+import { ErrorBoundary } from "../components/ErrorBoundary";
 import { useScrollExperience } from "../hooks/useScrollExperience";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import { useExperienceStore, scrollState } from "../state/experienceStore";
 import { products } from "../data/products";
 import "../styles/homepage.css";
@@ -13,6 +16,7 @@ import "../styles/homepage.css";
 const Experience = lazy(() => import("../three/Experience").then((m) => ({ default: m.Experience })));
 
 export default function Home() {
+  useDocumentTitle("UrbanEssentials — The Showroom");
   const resetToIntro = useExperienceStore((s) => s.resetToIntro);
   useEffect(() => {
     resetToIntro();
@@ -30,10 +34,16 @@ export default function Home() {
 
   return (
     <div className="home-root">
+      <a href="#finale-section" className="ue-skip-link">
+        Skip the 3D showroom — go to the collection
+      </a>
+
       <div className="canvas-layer">
-        <Suspense fallback={null}>
-          <Experience />
-        </Suspense>
+        <ErrorBoundary fallback={<ExperienceFallback />}>
+          <Suspense fallback={null}>
+            <Experience />
+          </Suspense>
+        </ErrorBoundary>
       </div>
 
       <NavBar />
@@ -46,7 +56,7 @@ export default function Home() {
         <section
           id="corridor-section"
           className="corridor-section"
-          style={{ height: `${products.length * 100}vh` }}
+          style={{ height: `${products.length * 100}svh` }}
         />
 
         <FinaleSection />

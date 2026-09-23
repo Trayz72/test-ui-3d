@@ -2,6 +2,10 @@ import { lazy, Suspense, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { NavBar } from "../components/homepage/NavBar";
 import { getProductBySlug } from "../data/products";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import { Canvas3DFallback } from "../components/Canvas3DFallback";
+import { useCartStore } from "../state/cartStore";
 import "../styles/shop.css";
 
 const ProductPreview = lazy(() =>
@@ -12,7 +16,9 @@ export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
   const product = slug ? getProductBySlug(slug) : undefined;
   const [colorwayIndex, setColorwayIndex] = useState(0);
-  const [added, setAdded] = useState(false);
+  const addItem = useCartStore((s) => s.addItem);
+
+  useDocumentTitle(product ? `${product.name} — UrbanEssentials` : "UrbanEssentials");
 
   if (!product) return <Navigate to="/shop" replace />;
 
@@ -21,11 +27,13 @@ export default function ProductDetail() {
   return (
     <div>
       <NavBar />
-      <div className="product-page">
+      <div className="product-page ue-page-transition">
         <div className="product-page__stage">
-          <Suspense fallback={null}>
-            <ProductPreview product={product} colorwayIndex={colorwayIndex} interactive />
-          </Suspense>
+          <ErrorBoundary fallback={<Canvas3DFallback label={product.name} />}>
+            <Suspense fallback={null}>
+              <ProductPreview product={product} colorwayIndex={colorwayIndex} interactive />
+            </Suspense>
+          </ErrorBoundary>
         </div>
         <div className="product-page__info">
           <Link to="/shop" className="product-page__back">
@@ -54,10 +62,7 @@ export default function ProductDetail() {
                 className={`product-page__swatch${i === colorwayIndex ? " product-page__swatch--active" : ""}`}
                 style={{ background: c.hex }}
                 aria-label={c.name}
-                onClick={() => {
-                  setColorwayIndex(i);
-                  setAdded(false);
-                }}
+                onClick={() => setColorwayIndex(i)}
               />
             ))}
           </div>
@@ -65,11 +70,10 @@ export default function ProductDetail() {
           <div className="product-page__actions">
             <button
               className="ue-btn ue-btn--solid"
-              onClick={() => setAdded(true)}
+              onClick={() => addItem(product.id, colorwayIndex)}
             >
               Add to Bag
             </button>
-            {added && <span className="product-page__added">Added to bag</span>}
           </div>
           <span className="product-page__hint">Drag to rotate · Scroll to zoom</span>
         </div>

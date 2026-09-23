@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { products } from "../../data/products";
 import { useExperienceStore } from "../../state/experienceStore";
 
@@ -13,7 +14,13 @@ export function CorridorCaptions() {
         </div>
         <h2 className="corridor-captions__name">{product.name}</h2>
         <p className="corridor-captions__tagline">{product.tagline}</p>
-        <div className="corridor-captions__hint">Click the tumbler to inspect</div>
+        <div className="corridor-captions__hint">
+          Click the tumbler to inspect, or{" "}
+          <Link to={`/product/${product.slug}`} className="corridor-captions__link">
+            view its page
+          </Link>
+          .
+        </div>
       </div>
       <div className="corridor-progress">
         {products.map((p, i) => (

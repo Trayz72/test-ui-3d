@@ -1,7 +1,8 @@
 {
-  "name": "test-ui-3d",
+  "name": "urbanessentials",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "UrbanEssentials — an immersive 3D showroom for modern drinkware.",
   "type": "module",
   "scripts": {
     "dev": "vite",

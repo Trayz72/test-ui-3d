@@ -37,7 +37,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.4rem clamp(1.4rem, 4vw, 3rem);
+  gap: 1rem;
+  padding: 1.2rem clamp(1.1rem, 4vw, 3rem);
   pointer-events: none;
   background: rgba(247, 243, 234, 0.72);
   backdrop-filter: blur(14px);
@@ -51,8 +52,18 @@
 
 .ue-nav__mark {
   font-family: var(--ue-font-display);
-  font-size: 1.3rem;
-  letter-spacing: 0.08em;
+  font-size: clamp(1rem, 4.5vw, 1.3rem);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ue-nav__right {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 1.6rem);
+  flex-shrink: 0;
 }
 
 .ue-nav__link {
@@ -62,6 +73,7 @@
   text-decoration: none;
   border-bottom: 1px solid transparent;
   padding-bottom: 2px;
+  white-space: nowrap;
   transition: border-color 0.3s var(--ue-ease);
 }
 
@@ -73,7 +85,9 @@
 
 .intro-section {
   position: relative;
-  height: 100vh;
+  /* svh (not vh) avoids the pinned scroll height jittering as mobile
+     browser chrome shows/hides during the scroll-jacked reveal. */
+  height: 100svh;
   width: 100%;
 }
 
@@ -175,11 +189,21 @@
 
 .corridor-captions__hint {
   font-size: 0.68rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   color: var(--ue-ink-dim);
   border-top: 1px solid var(--ue-line);
   padding-top: 0.8rem;
-  display: inline-flex;
+  line-height: 1.6;
+}
+
+.corridor-captions__link {
+  pointer-events: auto;
+  color: var(--ue-ember);
+  text-decoration: underline;
+}
+
+.corridor-captions__link:hover {
+  color: var(--ue-ember-bright);
 }
 
 .corridor-progress {
@@ -332,7 +356,7 @@
 
 .finale-section {
   position: relative;
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -368,4 +392,24 @@
   letter-spacing: 0.18em;
   color: var(--ue-ink-dim);
   background: var(--ue-bg);
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 640px) {
+  /* the caption card already shows "01 / 04" — the dot rail just collides
+     with it on narrow screens, so it's redundant chrome here. */
+  .corridor-progress {
+    display: none;
+  }
+
+  .corridor-captions {
+    right: 1.2rem;
+    max-width: none;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .focus-panel__body {
+    margin: 0 1rem 1.4rem;
+  }
 }

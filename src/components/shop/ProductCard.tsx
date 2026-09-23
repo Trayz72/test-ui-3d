@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/products";
+import { ErrorBoundary } from "../ErrorBoundary";
+import { Canvas3DFallback } from "../Canvas3DFallback";
 
 const ProductPreview = lazy(() =>
   import("../../three/ProductPreview").then((m) => ({ default: m.ProductPreview })),
@@ -14,9 +16,11 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link to={`/product/${product.slug}`} className="product-card">
       <div className="product-card__canvas">
-        <Suspense fallback={null}>
-          <ProductPreview product={product} colorwayIndex={0} />
-        </Suspense>
+        <ErrorBoundary fallback={<Canvas3DFallback label={product.name} />}>
+          <Suspense fallback={null}>
+            <ProductPreview product={product} colorwayIndex={0} />
+          </Suspense>
+        </ErrorBoundary>
       </div>
       <div className="product-card__body">
         <h3 className="product-card__name">{product.name}</h3>

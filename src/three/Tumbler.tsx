@@ -5,6 +5,7 @@ import type { Group, Mesh } from "three";
 import type { Product } from "../data/products";
 import { buildTumblerProfile } from "./geometry/tumblerProfiles";
 import { getLabelTexture } from "./textures/labelTexture";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 
 interface TumblerProps {
   product: Product;
@@ -28,6 +29,7 @@ export function Tumbler({
   const groupRef = useRef<Group>(null);
   const bodyRef = useRef<Mesh>(null);
   const hoverRef = useRef(false);
+  const reducedMotion = usePrefersReducedMotion();
 
   const colorway = product.colorways[colorwayIndex] ?? product.colorways[0];
 
@@ -45,10 +47,10 @@ export function Tumbler({
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
-    if (spin && !active) {
+    if (spin && !active && !reducedMotion) {
       groupRef.current.rotation.y += delta * 0.18;
     }
-    if (spin && active && !hoverRef.current) {
+    if (spin && active && !hoverRef.current && !reducedMotion) {
       groupRef.current.rotation.y += delta * 0.35;
     }
     const targetScale = hoverRef.current && !active ? 1.06 : 1;

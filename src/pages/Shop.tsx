@@ -1,13 +1,15 @@
 import { NavBar } from "../components/homepage/NavBar";
 import { ProductCard } from "../components/shop/ProductCard";
 import { products } from "../data/products";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 import "../styles/shop.css";
 
 export default function Shop() {
+  useDocumentTitle("Shop All — UrbanEssentials");
   return (
     <div>
       <NavBar />
-      <div className="shop-page">
+      <div className="shop-page ue-page-transition">
         <header className="shop-header">
           <span className="ue-eyebrow">Shop All</span>
           <h1>The Collection</h1>

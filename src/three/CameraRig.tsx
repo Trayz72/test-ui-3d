@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useExperienceStore, scrollState } from "../state/experienceStore";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import {
   introCameraCurve,
   introLookCurve,
@@ -16,6 +17,7 @@ const tmpLook = new THREE.Vector3();
 export function CameraRig() {
   const currentLook = useRef(new THREE.Vector3(0, 1.4, 0));
   const time = useRef(0);
+  const reducedMotion = usePrefersReducedMotion();
 
   useFrame(({ camera, clock }, delta) => {
     time.current = clock.elapsedTime;
@@ -27,7 +29,7 @@ export function CameraRig() {
       tmpLook.copy(target);
     } else if (!hasEntered) {
       tmpPos.copy(introCameraCurve.getPoint(0));
-      tmpPos.y += Math.sin(time.current * 0.5) * 0.03;
+      if (!reducedMotion) tmpPos.y += Math.sin(time.current * 0.5) * 0.03;
       tmpLook.copy(introLookCurve.getPoint(0));
     } else if (phase === "intro") {
       const t = THREE.MathUtils.clamp(scrollState.introProgress, 0, 1);

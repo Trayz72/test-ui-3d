@@ -1,5 +1,5 @@
 .shop-page {
-  min-height: 100vh;
+  min-height: 100svh;
   padding: 7rem clamp(1.2rem, 5vw, 4rem) 5rem;
 }
 
@@ -99,7 +99,7 @@
 /* ---------- product detail ---------- */
 
 .product-page {
-  min-height: 100vh;
+  min-height: 100svh;
   padding: 7rem clamp(1.2rem, 5vw, 4rem) 5rem;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -203,12 +203,6 @@
   align-items: center;
   gap: 1rem;
   margin-top: 0.6rem;
-}
-
-.product-page__added {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  color: var(--ue-moss);
 }
 
 .product-page__hint {
