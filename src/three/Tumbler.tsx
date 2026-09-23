@@ -33,7 +33,7 @@ export function Tumbler({
 
   const { geometry, baseRadius, height } = useMemo(() => {
     const { points, baseRadius, height } = buildTumblerProfile(product.profile);
-    const geo = new THREE.LatheGeometry(points, 56);
+    const geo = new THREE.LatheGeometry(points, 96);
     geo.computeVertexNormals();
     return { geometry: geo, baseRadius, height };
   }, [product.profile]);
@@ -103,6 +103,21 @@ export function Tumbler({
           toneMapped={false}
         />
       </mesh>
+
+      {/* grip ridges near the base */}
+      {[0.16, 0.21, 0.26].map((h) => (
+        <mesh key={h} position={[0, height * h, 0]}>
+          <torusGeometry args={[baseRadius * 0.9, height * 0.006, 8, 64]} />
+          <meshPhysicalMaterial
+            color={colorway.hex}
+            metalness={0.85}
+            roughness={0.4}
+            clearcoat={0.4}
+            transparent={dimmed}
+            opacity={dimmed ? 0.28 : 1}
+          />
+        </mesh>
+      ))}
 
       {/* lid */}
       <group position={[0, height, 0]}>

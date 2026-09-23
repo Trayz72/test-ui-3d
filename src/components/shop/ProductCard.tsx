@@ -1,6 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../../data/products";
-import { ProductPreview } from "../../three/ProductPreview";
+
+const ProductPreview = lazy(() =>
+  import("../../three/ProductPreview").then((m) => ({ default: m.ProductPreview })),
+);
 
 interface ProductCardProps {
   product: Product;
@@ -10,7 +14,9 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <Link to={`/product/${product.slug}`} className="product-card">
       <div className="product-card__canvas">
-        <ProductPreview product={product} colorwayIndex={0} />
+        <Suspense fallback={null}>
+          <ProductPreview product={product} colorwayIndex={0} />
+        </Suspense>
       </div>
       <div className="product-card__body">
         <h3 className="product-card__name">{product.name}</h3>

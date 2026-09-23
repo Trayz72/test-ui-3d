@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { NavBar } from "../components/homepage/NavBar";
-import { ProductPreview } from "../three/ProductPreview";
 import { getProductBySlug } from "../data/products";
 import "../styles/shop.css";
+
+const ProductPreview = lazy(() =>
+  import("../three/ProductPreview").then((m) => ({ default: m.ProductPreview })),
+);
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -20,7 +23,9 @@ export default function ProductDetail() {
       <NavBar />
       <div className="product-page">
         <div className="product-page__stage">
-          <ProductPreview product={product} colorwayIndex={colorwayIndex} interactive />
+          <Suspense fallback={null}>
+            <ProductPreview product={product} colorwayIndex={colorwayIndex} interactive />
+          </Suspense>
         </div>
         <div className="product-page__info">
           <Link to="/shop" className="product-page__back">

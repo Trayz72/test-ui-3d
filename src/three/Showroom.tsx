@@ -7,11 +7,11 @@ export function Showroom() {
   return (
     <>
       <fog attach="fog" args={["#f2ede0", 10, 40]} />
-      <ambientLight intensity={0.75} color="#fffaf0" />
-      <hemisphereLight args={["#ffffff", "#e6dfcd", 0.55]} />
+      <ambientLight intensity={0.32} color="#fffaf0" />
+      <hemisphereLight args={["#ffffff", "#e6dfcd", 0.3]} />
       <directionalLight
         position={[6, 12, 6]}
-        intensity={0.9}
+        intensity={0.7}
         color="#fff8ec"
         castShadow
         shadow-mapSize={[512, 512]}
@@ -31,7 +31,7 @@ export function Showroom() {
           target-position={p.position}
           angle={0.45}
           penumbra={0.7}
-          intensity={2.6}
+          intensity={2}
           distance={9}
           color="#fff3df"
         />

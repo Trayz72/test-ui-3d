@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
+import { Environment, Lightformer } from "@react-three/drei";
 import { Showroom } from "./Showroom";
 import { ProductCorridor } from "./ProductCorridor";
 import { CameraRig } from "./CameraRig";
@@ -19,10 +19,12 @@ export function Experience() {
       <Showroom />
       <ProductCorridor />
       <CameraRig />
-      <EffectComposer multisampling={0}>
-        <Bloom intensity={0.25} luminanceThreshold={0.88} luminanceSmoothing={0.3} mipmapBlur />
-        <Vignette eskil={false} offset={0.2} darkness={0.28} />
-      </EffectComposer>
+      {/* synthetic studio env — gives the metal tumblers real reflections without an external HDR fetch */}
+      <Environment resolution={128}>
+        <Lightformer intensity={2.5} color="#ffffff" position={[0, 5, 4]} scale={[10, 4, 1]} />
+        <Lightformer intensity={1.1} color="#b8641c" position={[-6, 2, -2]} scale={[6, 6, 1]} />
+        <Lightformer intensity={0.8} color="#ffffff" position={[6, 2, -2]} scale={[6, 6, 1]} />
+      </Environment>
     </Canvas>
   );
 }

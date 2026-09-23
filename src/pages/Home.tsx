@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Experience } from "../three/Experience";
+import { lazy, Suspense, useEffect } from "react";
 import { NavBar } from "../components/homepage/NavBar";
 import { IntroOverlay } from "../components/homepage/IntroOverlay";
 import { CorridorCaptions } from "../components/homepage/CorridorCaptions";
@@ -10,6 +9,8 @@ import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
 import { useExperienceStore, scrollState } from "../state/experienceStore";
 import { products } from "../data/products";
 import "../styles/homepage.css";
+
+const Experience = lazy(() => import("../three/Experience").then((m) => ({ default: m.Experience })));
 
 export default function Home() {
   const resetToIntro = useExperienceStore((s) => s.resetToIntro);
@@ -30,7 +31,9 @@ export default function Home() {
   return (
     <div className="home-root">
       <div className="canvas-layer">
-        <Experience />
+        <Suspense fallback={null}>
+          <Experience />
+        </Suspense>
       </div>
 
       <NavBar />
