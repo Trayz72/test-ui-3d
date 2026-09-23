@@ -37,8 +37,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.6rem clamp(1.4rem, 4vw, 3rem);
+  padding: 1.4rem clamp(1.4rem, 4vw, 3rem);
   pointer-events: none;
+  background: rgba(247, 243, 234, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ue-line);
 }
 
 .ue-nav > * {
@@ -83,6 +87,11 @@
   text-align: center;
   gap: 1.4rem;
   padding: 0 1.5rem;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 50%,
+    rgba(247, 243, 234, 0.55) 0%,
+    rgba(247, 243, 234, 0) 100%
+  );
 }
 
 .intro-copy h1 {
@@ -92,7 +101,7 @@
 
 .intro-copy p {
   max-width: 34ch;
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   font-size: 0.98rem;
   line-height: 1.5;
 }
@@ -108,7 +117,7 @@
   gap: 0.5rem;
   font-size: 0.68rem;
   letter-spacing: 0.28em;
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
 }
 
 .intro-scroll-cue span {
@@ -137,12 +146,19 @@
   z-index: 12;
   max-width: 26rem;
   pointer-events: none;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--ue-line);
+  border-radius: 20px;
+  padding: 1.5rem 1.7rem;
+  box-shadow: var(--ue-shadow-soft);
 }
 
 .corridor-captions__index {
   font-size: 0.72rem;
   letter-spacing: 0.3em;
-  color: var(--ue-ember-bright);
+  color: var(--ue-ember);
   margin-bottom: 0.6rem;
 }
 
@@ -152,7 +168,7 @@
 }
 
 .corridor-captions__tagline {
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   font-size: 0.95rem;
   margin-bottom: 1rem;
 }
@@ -160,7 +176,7 @@
 .corridor-captions__hint {
   font-size: 0.68rem;
   letter-spacing: 0.22em;
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   border-top: 1px solid var(--ue-line);
   padding-top: 0.8rem;
   display: inline-flex;
@@ -173,8 +189,15 @@
   z-index: 12;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.6rem;
   pointer-events: none;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--ue-line);
+  border-radius: 999px;
+  padding: 0.8rem 0.5rem;
 }
 
 .corridor-progress__dot {
@@ -206,9 +229,9 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(8, 8, 10, 0.92) 0%,
-    rgba(8, 8, 10, 0.45) 45%,
-    rgba(8, 8, 10, 0) 75%
+    rgba(247, 243, 234, 0.96) 0%,
+    rgba(247, 243, 234, 0.55) 45%,
+    rgba(247, 243, 234, 0) 75%
   );
   pointer-events: auto;
 }
@@ -229,7 +252,7 @@
   left: 0;
   background: none;
   border: none;
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   display: inline-flex;
@@ -239,7 +262,7 @@
 }
 
 .focus-panel__close:hover {
-  color: var(--ue-paper);
+  color: var(--ue-ink);
 }
 
 .focus-panel__name {
@@ -253,7 +276,7 @@
 }
 
 .focus-panel__desc {
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   font-size: 0.92rem;
   line-height: 1.55;
   max-width: 42ch;
@@ -264,13 +287,13 @@
   gap: 1.6rem;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   text-transform: uppercase;
 }
 
 .focus-panel__meta strong {
   display: block;
-  color: var(--ue-paper);
+  color: var(--ue-ink);
   font-size: 1rem;
   font-family: var(--ue-font-display);
   letter-spacing: 0.02em;
@@ -294,7 +317,7 @@
 }
 
 .focus-panel__swatch--active {
-  border-color: var(--ue-paper);
+  border-color: var(--ue-ink);
   transform: scale(1.12);
 }
 
@@ -315,7 +338,7 @@
   justify-content: center;
   text-align: center;
   padding: 6rem 1.5rem;
-  background: linear-gradient(to bottom, transparent, var(--ue-void) 32%);
+  background: linear-gradient(to bottom, transparent, var(--ue-bg) 32%);
 }
 
 .finale-section__inner {
@@ -331,7 +354,7 @@
 }
 
 .finale-section p {
-  color: var(--ue-paper-dim);
+  color: var(--ue-ink-dim);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -343,6 +366,6 @@
   padding: 2rem 1rem 3rem;
   font-size: 0.68rem;
   letter-spacing: 0.18em;
-  color: var(--ue-paper-dim);
-  background: var(--ue-void);
+  color: var(--ue-ink-dim);
+  background: var(--ue-bg);
 }
