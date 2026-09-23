@@ -1,0 +1,122 @@
+:root {
+  color-scheme: dark;
+
+  /* Brand palette — UrbanEssentials */
+  --ue-void: #08080a;
+  --ue-ink: #111114;
+  --ue-ink-2: #1a1a1f;
+  --ue-line: rgba(245, 241, 234, 0.12);
+  --ue-paper: #f5f1ea;
+  --ue-paper-dim: rgba(245, 241, 234, 0.62);
+  --ue-ember: #d98a3d;
+  --ue-ember-bright: #f4a94f;
+  --ue-moss: #7c8b74;
+
+  --ue-font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --ue-font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --ue-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--ue-void);
+  color: var(--ue-paper);
+  font-family: var(--ue-font-body);
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ue-font-display);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: var(--ue-font-body);
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--ue-ember);
+  color: var(--ue-void);
+}
+
+.ue-eyebrow {
+  font-family: var(--ue-font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ue-ember-bright);
+}
+
+.ue-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  border: 1px solid var(--ue-line);
+  background: transparent;
+  color: var(--ue-paper);
+  padding: 0.9em 1.6em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  transition:
+    background 0.35s var(--ue-ease),
+    color 0.35s var(--ue-ease),
+    border-color 0.35s var(--ue-ease),
+    transform 0.35s var(--ue-ease);
+}
+
+.ue-btn:hover {
+  background: var(--ue-paper);
+  color: var(--ue-void);
+  border-color: var(--ue-paper);
+  transform: translateY(-1px);
+}
+
+.ue-btn--solid {
+  background: var(--ue-ember);
+  border-color: var(--ue-ember);
+  color: var(--ue-void);
+}
+
+.ue-btn--solid:hover {
+  background: var(--ue-ember-bright);
+  border-color: var(--ue-ember-bright);
+  color: var(--ue-void);
+}
+
+.ue-scrollbar-hide {
+  scrollbar-width: none;
+}
+
+.ue-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

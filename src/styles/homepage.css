@@ -1,0 +1,348 @@
+.home-root {
+  position: relative;
+}
+
+.canvas-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.canvas-layer canvas {
+  display: block;
+}
+
+.scroll-layer {
+  position: relative;
+  z-index: 1;
+  /* corridor-section is an empty scroll-height spacer; without this it would
+     sit on top of the canvas for the whole corridor and eat every click
+     meant for the 3D tumblers. Interactive children opt back in below. */
+  pointer-events: none;
+}
+
+.intro-copy,
+.finale-section {
+  pointer-events: auto;
+}
+
+/* ---------- nav ---------- */
+
+.ue-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem clamp(1.4rem, 4vw, 3rem);
+  pointer-events: none;
+}
+
+.ue-nav > * {
+  pointer-events: auto;
+}
+
+.ue-nav__mark {
+  font-family: var(--ue-font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+}
+
+.ue-nav__link {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.3s var(--ue-ease);
+}
+
+.ue-nav__link:hover {
+  border-color: var(--ue-ember-bright);
+}
+
+/* ---------- intro ---------- */
+
+.intro-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.intro-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.4rem;
+  padding: 0 1.5rem;
+}
+
+.intro-copy h1 {
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.95;
+}
+
+.intro-copy p {
+  max-width: 34ch;
+  color: var(--ue-paper-dim);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.intro-scroll-cue {
+  position: absolute;
+  bottom: 2.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: var(--ue-paper-dim);
+}
+
+.intro-scroll-cue span {
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(to bottom, var(--ue-ember), transparent);
+  animation: ue-cue-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ue-cue-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- corridor captions ---------- */
+
+.corridor-captions {
+  position: fixed;
+  left: clamp(1.4rem, 5vw, 4rem);
+  bottom: clamp(2rem, 6vh, 4rem);
+  z-index: 12;
+  max-width: 26rem;
+  pointer-events: none;
+}
+
+.corridor-captions__index {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--ue-ember-bright);
+  margin-bottom: 0.6rem;
+}
+
+.corridor-captions__name {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-bottom: 0.5rem;
+}
+
+.corridor-captions__tagline {
+  color: var(--ue-paper-dim);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.corridor-captions__hint {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--ue-paper-dim);
+  border-top: 1px solid var(--ue-line);
+  padding-top: 0.8rem;
+  display: inline-flex;
+}
+
+.corridor-progress {
+  position: fixed;
+  right: clamp(1.4rem, 5vw, 3rem);
+  bottom: clamp(2rem, 6vh, 4rem);
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.corridor-progress__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ue-line);
+  transition: background 0.3s var(--ue-ease), transform 0.3s var(--ue-ease);
+}
+
+.corridor-progress__dot--active {
+  background: var(--ue-ember-bright);
+  transform: scale(1.6);
+}
+
+/* ---------- focus panel ---------- */
+
+.focus-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.focus-panel__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 8, 10, 0.92) 0%,
+    rgba(8, 8, 10, 0.45) 45%,
+    rgba(8, 8, 10, 0) 75%
+  );
+  pointer-events: auto;
+}
+
+.focus-panel__body {
+  position: relative;
+  width: min(100%, 30rem);
+  margin: 0 clamp(1.2rem, 4vw, 3.5rem) clamp(1.6rem, 6vh, 4rem);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.focus-panel__close {
+  position: absolute;
+  top: -3.2rem;
+  left: 0;
+  background: none;
+  border: none;
+  color: var(--ue-paper-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0;
+}
+
+.focus-panel__close:hover {
+  color: var(--ue-paper);
+}
+
+.focus-panel__name {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+}
+
+.focus-panel__tagline {
+  color: var(--ue-ember-bright);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.focus-panel__desc {
+  color: var(--ue-paper-dim);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  max-width: 42ch;
+}
+
+.focus-panel__meta {
+  display: flex;
+  gap: 1.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--ue-paper-dim);
+  text-transform: uppercase;
+}
+
+.focus-panel__meta strong {
+  display: block;
+  color: var(--ue-paper);
+  font-size: 1rem;
+  font-family: var(--ue-font-display);
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.focus-panel__swatches {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.focus-panel__swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color 0.25s var(--ue-ease), transform 0.25s var(--ue-ease);
+}
+
+.focus-panel__swatch--active {
+  border-color: var(--ue-paper);
+  transform: scale(1.12);
+}
+
+.focus-panel__actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+
+/* ---------- finale ---------- */
+
+.finale-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem;
+  background: linear-gradient(to bottom, transparent, var(--ue-void) 32%);
+}
+
+.finale-section__inner {
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.finale-section h2 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+}
+
+.finale-section p {
+  color: var(--ue-paper-dim);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ue-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--ue-paper-dim);
+  background: var(--ue-void);
+}
